@@ -1,0 +1,740 @@
+{
+  "meta": {
+    "csv_path": "survey.csv",
+    "n_raw": 201,
+    "n_declined_consent": 2,
+    "n_consented": 199,
+    "timestamp_min": "2025/07/14 11:02:15 PM GMT+6",
+    "timestamp_max": "2026/02/01 6:15:06 AM GMT+6",
+    "note": "N_consented is the analytic base sample. Per-question N varies below due to pairwise deletion (item non-response), matching the paper's stated deletion strategy.",
+    "methodology_note": "v2: normality/homogeneity assumptions are now checked explicitly rather than assumed; see module docstring."
+  },
+  "demographics": {
+    "gender": {
+      "Male": 131,
+      "Female": 68
+    },
+    "gender_pct": {
+      "Male": 65.8,
+      "Female": 34.2
+    },
+    "age": {
+      "24-26": 73,
+      "21-23": 50,
+      "18–20": 36,
+      "Under 18": 14,
+      "27-30": 14,
+      "Above 30": 12
+    },
+    "residence": {
+      "Major City": 128,
+      "Town or Small City": 49,
+      "Rural Area / Village": 22
+    },
+    "residence_pct": {
+      "Major City": 64.3,
+      "Town or Small City": 24.6,
+      "Rural Area / Village": 11.1
+    },
+    "ses": {
+      "Middle-income": 130,
+      "Lower-income": 46,
+      "Upper-income": 23
+    },
+    "ses_pct": {
+      "Middle-income": 65.3,
+      "Lower-income": 23.1,
+      "Upper-income": 11.6
+    },
+    "algo_awareness": {
+      "Yes": 132,
+      "No": 67
+    },
+    "algo_awareness_pct": {
+      "Yes": 66.3,
+      "No": 33.7
+    },
+    "education": {
+      "Bachelor’s": 99,
+      "HSC": 66,
+      "SSC or below": 23,
+      "Master’s": 11
+    },
+    "education_pct": {
+      "Bachelor’s": 49.7,
+      "HSC": 33.2,
+      "SSC or below": 11.6,
+      "Master’s": 5.5
+    },
+    "tech_familiarity": {
+      "Moderate": 93,
+      "High": 57,
+      "Very High": 25,
+      "Low": 12,
+      "Very Low": 12
+    },
+    "tech_familiarity_pct": {
+      "Moderate": 46.7,
+      "High": 28.6,
+      "Very High": 12.6,
+      "Low": 6.0,
+      "Very Low": 6.0
+    },
+    "n_gender": 199,
+    "n_age": 199,
+    "n_residence": 199,
+    "n_ses": 199,
+    "n_awareness": 199,
+    "n_education": 199,
+    "n_tech_familiarity": 199
+  },
+  "scenario_awareness": {
+    "ride_sharing": {
+      "n": 199,
+      "pct_yes": 69.3
+    },
+    "beauty_filter": {
+      "n": 198,
+      "pct_yes": 73.2
+    },
+    "llm": {
+      "n": 197,
+      "pct_yes": 63.5
+    }
+  },
+  "ride_share_emergency_vs_casual": {
+    "n": 185,
+    "normality_ok": false,
+    "shapiro_p_a": 1.03912399437253e-15,
+    "shapiro_p_b": 1.1546861947437125e-12,
+    "primary_test": "wilcoxon",
+    "paired_t": -2.637,
+    "paired_t_p": 0.009080087603367138,
+    "wilcoxon_w": 622.5,
+    "wilcoxon_p": 0.005774284298506768,
+    "cohens_d": -0.194,
+    "mean_diff_95ci": [
+      -0.302,
+      -0.044
+    ],
+    "eta_squared": 0.0364,
+    "cronbach_alpha": 0.842,
+    "emergency_mean": 2.0,
+    "emergency_sd": 1.251,
+    "casual_mean": 2.173,
+    "casual_sd": 1.148,
+    "p_value": 0.005774284298506768,
+    "by_ses": {
+      "Lower-income": {
+        "n": 42,
+        "emergency_mean": 2.048,
+        "casual_mean": 2.119
+      },
+      "Middle-income": {
+        "n": 120,
+        "emergency_mean": 2.008,
+        "casual_mean": 2.242
+      },
+      "Upper-income": {
+        "n": 23,
+        "emergency_mean": 1.87,
+        "casual_mean": 1.913
+      }
+    }
+  },
+  "beauty_self_image_vs_social_pressure": {
+    "n": 197,
+    "normality_ok": false,
+    "shapiro_p_a": 7.87286375484933e-11,
+    "shapiro_p_b": 4.95230929885777e-12,
+    "primary_test": "wilcoxon",
+    "paired_t": 4.464,
+    "paired_t_p": 1.3549430257367664e-05,
+    "wilcoxon_w": 1841.5,
+    "wilcoxon_p": 8.944991629021502e-06,
+    "cohens_d": 0.318,
+    "mean_diff_95ci": [
+      0.283,
+      0.732
+    ],
+    "eta_squared": 0.0923,
+    "cronbach_alpha": 0.427,
+    "self_image_mean": 2.97,
+    "self_image_sd": 1.34,
+    "social_pressure_mean": 2.462,
+    "social_pressure_sd": 1.303,
+    "p_value": 8.944991629021502e-06
+  },
+  "beauty_personal_impact_regression": {
+    "n": 197,
+    "construct_definition": "Predictor is bf_personally_affected alone (\"How personally affected would you feel by such filters?\"); outcome is bf_self_image_effect. Revised from an earlier version that averaged in bf_social_pressure and mislabeled the result 'filter exposure' -- this instrument has no usage-frequency item, so no true exposure/dose measure exists in the data. This is reported as a correlation between two distinct self-report impact measures, not a dose-response relationship.",
+    "beta": 0.545,
+    "intercept": 1.577,
+    "r_squared": 0.298,
+    "pearson_r_95ci": [
+      0.44,
+      0.637
+    ],
+    "pearson_p": 1.0641695088879169e-16,
+    "spearman_rho": 0.527,
+    "spearman_p": 1.80551075992645e-15,
+    "gender_interaction_p": 0.9446
+  },
+  "rq4_overall": {
+    "customize": {
+      "n": 196,
+      "n_yes": 170,
+      "pct_yes": 86.7
+    },
+    "explain": {
+      "n": 196,
+      "n_yes": 177,
+      "pct_yes": 90.3
+    },
+    "prior_consent": {
+      "n": 196,
+      "n_yes": 168,
+      "pct_yes": 85.7
+    },
+    "indicate_bias": {
+      "n": 192,
+      "n_yes": 169,
+      "pct_yes": 88.0
+    }
+  },
+  "rq4_by_group": {
+    "by_ses": {
+      "customize": {
+        "chi_square": {
+          "chi2": 0.192,
+          "p": 0.9082915652952984,
+          "dof": 2,
+          "min_expected_count": 3.05,
+          "expected_counts_adequate": false
+        },
+        "anova": {
+          "levene_p": 0.9095875120641391,
+          "variance_homogeneous": true,
+          "method": "standard_anova",
+          "F": 0.095,
+          "p": 0.9095875120641392
+        },
+        "pct_yes_by_group": {
+          "Lower-income": 88.6,
+          "Middle-income": 86.0,
+          "Upper-income": 87.0
+        }
+      },
+      "explain": {
+        "chi_square": {
+          "chi2": 1.555,
+          "p": 0.45961869168101477,
+          "dof": 2,
+          "min_expected_count": 2.23,
+          "expected_counts_adequate": false
+        },
+        "anova": {
+          "levene_p": 0.4637026482289314,
+          "variance_homogeneous": true,
+          "method": "standard_anova",
+          "F": 0.772,
+          "p": 0.4637026482289312
+        },
+        "pct_yes_by_group": {
+          "Lower-income": 86.4,
+          "Middle-income": 90.7,
+          "Upper-income": 95.7
+        }
+      },
+      "prior_consent": {
+        "chi_square": {
+          "chi2": 0.065,
+          "p": 0.9681149695986894,
+          "dof": 2,
+          "min_expected_count": 3.29,
+          "expected_counts_adequate": false
+        },
+        "anova": {
+          "levene_p": 0.9685901494917977,
+          "variance_homogeneous": true,
+          "method": "standard_anova",
+          "F": 0.032,
+          "p": 0.9685901494917978
+        },
+        "pct_yes_by_group": {
+          "Lower-income": 86.4,
+          "Middle-income": 85.3,
+          "Upper-income": 87.0
+        }
+      },
+      "indicate_bias": {
+        "chi_square": {
+          "chi2": 1.83,
+          "p": 0.40045751764585863,
+          "dof": 2,
+          "min_expected_count": 2.76,
+          "expected_counts_adequate": false
+        },
+        "anova": {
+          "levene_p": 0.40447324301019233,
+          "variance_homogeneous": true,
+          "method": "standard_anova",
+          "F": 0.91,
+          "p": 0.40447324301019233
+        },
+        "pct_yes_by_group": {
+          "Lower-income": 93.2,
+          "Middle-income": 87.2,
+          "Upper-income": 82.6
+        }
+      }
+    },
+    "by_gender": {
+      "customize": {
+        "chi_square": {
+          "chi2": 1.345,
+          "p": 0.24616123825799507,
+          "dof": 1,
+          "min_expected_count": 8.89,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": 1.381,
+          "p": 0.1687514680117798
+        },
+        "phi_coefficient": 0.099,
+        "phi_p": 0.16875146801177968,
+        "pct_yes_by_group": {
+          "Female": 82.1,
+          "Male": 89.1
+        }
+      },
+      "explain": {
+        "chi_square": {
+          "chi2": 0.0,
+          "p": 1.0,
+          "dof": 1,
+          "min_expected_count": 6.49,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": -0.251,
+          "p": 0.8023591134097833
+        },
+        "phi_coefficient": -0.018,
+        "phi_p": 0.8023591134097832,
+        "pct_yes_by_group": {
+          "Female": 91.0,
+          "Male": 89.9
+        }
+      },
+      "prior_consent": {
+        "chi_square": {
+          "chi2": 0.001,
+          "p": 0.9754776644463851,
+          "dof": 1,
+          "min_expected_count": 9.57,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": -0.245,
+          "p": 0.8069534473107771
+        },
+        "phi_coefficient": -0.018,
+        "phi_p": 0.8069534473107797,
+        "pct_yes_by_group": {
+          "Female": 86.6,
+          "Male": 85.3
+        }
+      },
+      "indicate_bias": {
+        "chi_square": {
+          "chi2": 0.018,
+          "p": 0.8929765454774321,
+          "dof": 1,
+          "min_expected_count": 7.79,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": -0.368,
+          "p": 0.7136015914002667
+        },
+        "phi_coefficient": -0.027,
+        "phi_p": 0.7136015914002682,
+        "pct_yes_by_group": {
+          "Female": 89.2,
+          "Male": 87.4
+        }
+      }
+    },
+    "by_awareness": {
+      "customize": {
+        "chi_square": {
+          "chi2": 0.705,
+          "p": 0.4010243036388921,
+          "dof": 1,
+          "min_expected_count": 8.62,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": 1.061,
+          "p": 0.28998188105362355
+        },
+        "phi_coefficient": 0.076,
+        "phi_p": 0.28998188105362216,
+        "pct_yes_by_group": {
+          "not_aware": 83.1,
+          "aware": 88.5
+        }
+      },
+      "explain": {
+        "chi_square": {
+          "chi2": 0.378,
+          "p": 0.5386809381042839,
+          "dof": 1,
+          "min_expected_count": 6.3,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": 0.868,
+          "p": 0.3862352584720527
+        },
+        "phi_coefficient": 0.062,
+        "phi_p": 0.38623525847205364,
+        "pct_yes_by_group": {
+          "not_aware": 87.7,
+          "aware": 91.6
+        }
+      },
+      "prior_consent": {
+        "chi_square": {
+          "chi2": 0.922,
+          "p": 0.33703235339427273,
+          "dof": 1,
+          "min_expected_count": 9.29,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": 1.175,
+          "p": 0.2414473340039702
+        },
+        "phi_coefficient": 0.084,
+        "phi_p": 0.2414473340039705,
+        "pct_yes_by_group": {
+          "not_aware": 81.5,
+          "aware": 87.8
+        }
+      },
+      "indicate_bias": {
+        "chi_square": {
+          "chi2": 1.784,
+          "p": 0.1816087875320947,
+          "dof": 1,
+          "min_expected_count": 7.67,
+          "expected_counts_adequate": true
+        },
+        "t_test": {
+          "t": 1.573,
+          "p": 0.11726748605471049
+        },
+        "phi_coefficient": 0.113,
+        "phi_p": 0.1172674860547105,
+        "pct_yes_by_group": {
+          "not_aware": 82.8,
+          "aware": 90.6
+        }
+      }
+    },
+    "by_education": {
+      "customize": {
+        "chi_square": {
+          "chi2": 5.824,
+          "p": 0.12049573236181897,
+          "dof": 3,
+          "min_expected_count": 1.33,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Bachelor’s": 85.7,
+          "HSC": 90.8,
+          "Master’s": 100.0,
+          "SSC or below": 73.9
+        }
+      },
+      "explain": {
+        "chi_square": {
+          "chi2": 2.675,
+          "p": 0.44445672375336953,
+          "dof": 3,
+          "min_expected_count": 0.97,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Bachelor’s": 90.8,
+          "HSC": 90.8,
+          "Master’s": 100.0,
+          "SSC or below": 82.6
+        }
+      },
+      "prior_consent": {
+        "chi_square": {
+          "chi2": 4.817,
+          "p": 0.18573336467660562,
+          "dof": 3,
+          "min_expected_count": 1.43,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Bachelor’s": 82.7,
+          "HSC": 90.8,
+          "Master’s": 100.0,
+          "SSC or below": 78.3
+        }
+      },
+      "indicate_bias": {
+        "chi_square": {
+          "chi2": 3.303,
+          "p": 0.3472190093294632,
+          "dof": 3,
+          "min_expected_count": 1.2,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Bachelor’s": 87.2,
+          "HSC": 92.3,
+          "Master’s": 90.0,
+          "SSC or below": 78.3
+        }
+      }
+    },
+    "by_occupation": {
+      "customize": {
+        "chi_square": {
+          "chi2": 2.736,
+          "p": 0.6029428721106459,
+          "dof": 4,
+          "min_expected_count": 0.53,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Faculty / শিক্ষক": 100.0,
+          "Job Holder": 88.9,
+          "Self-employed / Business": 81.2,
+          "Student": 85.2,
+          "Unemployed": 95.2
+        }
+      },
+      "explain": {
+        "chi_square": {
+          "chi2": 2.353,
+          "p": 0.6711298127601119,
+          "dof": 4,
+          "min_expected_count": 0.39,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Faculty / শিক্ষক": 100.0,
+          "Job Holder": 96.3,
+          "Self-employed / Business": 93.8,
+          "Student": 88.3,
+          "Unemployed": 90.5
+        }
+      },
+      "prior_consent": {
+        "chi_square": {
+          "chi2": 1.647,
+          "p": 0.8002530424348834,
+          "dof": 4,
+          "min_expected_count": 0.57,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Faculty / শিক্ষক": 75.0,
+          "Job Holder": 92.6,
+          "Self-employed / Business": 87.5,
+          "Student": 84.4,
+          "Unemployed": 85.7
+        }
+      },
+      "indicate_bias": {
+        "chi_square": {
+          "chi2": 3.012,
+          "p": 0.5558432819381943,
+          "dof": 4,
+          "min_expected_count": 0.48,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Faculty / শিক্ষক": 75.0,
+          "Job Holder": 92.6,
+          "Self-employed / Business": 81.2,
+          "Student": 87.1,
+          "Unemployed": 95.2
+        }
+      }
+    },
+    "by_residence": {
+      "customize": {
+        "chi_square": {
+          "chi2": 6.454,
+          "p": 0.03966643660979121,
+          "dof": 2,
+          "min_expected_count": 2.79,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Major City": 86.5,
+          "Rural Area / Village": 71.4,
+          "Town or Small City": 93.9
+        }
+      },
+      "explain": {
+        "chi_square": {
+          "chi2": 0.641,
+          "p": 0.7257518474274169,
+          "dof": 2,
+          "min_expected_count": 2.04,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Major City": 90.5,
+          "Rural Area / Village": 85.7,
+          "Town or Small City": 91.8
+        }
+      },
+      "prior_consent": {
+        "chi_square": {
+          "chi2": 7.148,
+          "p": 0.028041377996335524,
+          "dof": 2,
+          "min_expected_count": 3.0,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Major City": 87.3,
+          "Rural Area / Village": 66.7,
+          "Town or Small City": 89.8
+        }
+      },
+      "indicate_bias": {
+        "chi_square": {
+          "chi2": 4.171,
+          "p": 0.1242190514396574,
+          "dof": 2,
+          "min_expected_count": 2.52,
+          "expected_counts_adequate": false
+        },
+        "pct_yes_by_group": {
+          "Major City": 91.1,
+          "Rural Area / Village": 76.2,
+          "Town or Small City": 85.4
+        }
+      }
+    }
+  },
+  "multiple_comparisons_correction": {
+    "rq4_by_ses_chi_square_bonferroni": {
+      "customize": 1.0,
+      "explain": 1.0,
+      "prior_consent": 1.0,
+      "indicate_bias": 1.0
+    },
+    "rq4_by_gender_chi_square_bonferroni": {
+      "customize": 0.9846,
+      "explain": 1.0,
+      "prior_consent": 1.0,
+      "indicate_bias": 1.0
+    },
+    "rq4_by_awareness_chi_square_bonferroni": {
+      "customize": 1.0,
+      "explain": 1.0,
+      "prior_consent": 1.0,
+      "indicate_bias": 0.7264
+    },
+    "rq4_by_education_chi_square_bonferroni": {
+      "customize": 0.482,
+      "explain": 1.0,
+      "prior_consent": 0.7429,
+      "indicate_bias": 1.0
+    },
+    "rq4_by_occupation_chi_square_bonferroni": {
+      "customize": 1.0,
+      "explain": 1.0,
+      "prior_consent": 1.0,
+      "indicate_bias": 1.0
+    },
+    "rq4_by_residence_chi_square_bonferroni": {
+      "customize": 0.1587,
+      "explain": 1.0,
+      "prior_consent": 0.1122,
+      "indicate_bias": 0.4969
+    },
+    "note": "Bonferroni applied within each family of 4 related exploratory tests (one per RQ4 measure: customize, explain, prior_consent, indicate_bias). The three pre-specified primary comparisons (ride-share context, beauty self-image vs. social pressure, harm-trust correlation) are not corrected against this or any other family. Education/occupation/residence families (added later, see peer_review_synthesis.md) are exploratory post hoc additions, not part of the pre-registered SES/gender/awareness set.",
+    "technical_familiarity_bonferroni": {
+      "Ride-Sharing": 0.0063,
+      "Beauty Filters": 1.0,
+      "LLM Cultural Bias": 0.3165
+    }
+  },
+  "technical_familiarity_vs_harm": {
+    "Ride-Sharing": {
+      "n": 199,
+      "rho": 0.217,
+      "p": 0.002109057129410308,
+      "rho_95ci": [
+        0.08,
+        0.345
+      ]
+    },
+    "Beauty Filters": {
+      "n": 197,
+      "rho": -0.028,
+      "p": 0.692781377881813,
+      "rho_95ci": [
+        -0.167,
+        0.112
+      ]
+    },
+    "LLM Cultural Bias": {
+      "n": 197,
+      "rho": 0.116,
+      "p": 0.10550979886551622,
+      "rho_95ci": [
+        -0.025,
+        0.251
+      ]
+    }
+  },
+  "harm_trust_correlation": {
+    "n": 199,
+    "spearman_rho": 0.599,
+    "spearman_p": 8.593521065493085e-21,
+    "spearman_rho_95ci": [
+      0.502,
+      0.682
+    ],
+    "pearson_r": 0.593,
+    "pearson_p": 2.5866397379139267e-20
+  },
+  "expectation_cohesion": {
+    "explain_vs_consent": {
+      "n": 196,
+      "phi": 0.556,
+      "p": 2.622528224605316e-17
+    },
+    "explain_vs_bias_disclosure": {
+      "n": 192,
+      "phi": 0.322,
+      "p": 5.413607851811837e-06
+    }
+  },
+  "sensitivity_analysis": {
+    "note": "Minimum detectable Cohen's d at alpha=.05, 80% power, for a paired design, given actual N per comparison. Effects smaller than this could exist in the population without this study reliably detecting them.",
+    "main_ride_share_comparison_n": 185,
+    "main_ride_share_mde_d": 0.207,
+    "main_beauty_comparison_n": 197,
+    "main_beauty_mde_d": 0.201,
+    "smallest_subgroup_n": 23,
+    "smallest_subgroup_mde_d": 0.611
+  }
+}

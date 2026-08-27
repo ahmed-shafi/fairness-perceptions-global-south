@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "source_file": "ride-share-survey.xlsx",
+    "n": 47,
+    "timestamp_min": "2025-08-24 11:49:50.946000",
+    "timestamp_max": "2025-12-10 20:34:37.855000",
+    "pii_columns_dropped": [
+      "full name",
+      "email",
+      "signature"
+    ],
+    "note": "Supplementary ride-sharing-only follow-up sample; analyzed separately from the main N=199 sample throughout (see module docstring for why). No beauty-filter or LLM items in this instrument."
+  },
+  "demographics": {
+    "age": {
+      "27-30": 19,
+      "24-26": 15,
+      "Above 30": 11,
+      "21-23": 2
+    },
+    "age_pct": {
+      "27-30": 40.4,
+      "24-26": 31.9,
+      "Above 30": 23.4,
+      "21-23": 4.3
+    },
+    "gender": {
+      "Male": 47
+    },
+    "residence": {
+      "Rural Area / Village": 23,
+      "Town or Small City": 20,
+      "Major City": 4
+    },
+    "residence_pct": {
+      "Rural Area / Village": 48.9,
+      "Town or Small City": 42.6,
+      "Major City": 8.5
+    },
+    "algo_awareness_pct_yes": 55.3
+  },
+  "awareness_and_attitude_vs_main_sample": {
+    "aware_diff_pricing": {
+      "followup_n": 47,
+      "followup_pct_yes": 91.5,
+      "main_n": 199,
+      "main_pct_yes": 69.3,
+      "chi2": 8.483,
+      "p": 0.003584008719042958,
+      "min_expected_count": 12.42
+    },
+    "should_explain_fare": {
+      "followup_n": 47,
+      "followup_pct_yes": 95.7,
+      "main_n": 199,
+      "main_pct_yes": 86.4,
+      "chi2": 2.338,
+      "p": 0.12621440896587893,
+      "min_expected_count": 5.54
+    },
+    "transparency_fairer": {
+      "followup_n": 47,
+      "followup_pct_yes": 100.0,
+      "main_n": 199,
+      "main_pct_yes": 94.0,
+      "chi2": 1.822,
+      "p": 0.17711734222511025,
+      "min_expected_count": 2.29
+    }
+  },
+  "fair_overall_vs_main_sample": {
+    "followup_n": 47,
+    "followup_pct_fair": 61.7,
+    "main_n": 199,
+    "main_pct_fair": 26.1,
+    "chi2": 20.202,
+    "p": 6.967012195218295e-06,
+    "min_expected_count": 15.48
+  },
+  "ride_share_emergency_vs_casual_followup": {
+    "n": 47,
+    "normality_ok": false,
+    "shapiro_p_a": 0.0002659994955716004,
+    "shapiro_p_b": 2.2988636131832466e-05,
+    "primary_test": "wilcoxon",
+    "paired_t": -0.163,
+    "paired_t_p": 0.8714771238557861,
+    "wilcoxon_w": 39.0,
+    "wilcoxon_p": 0.6365749108067902,
+    "cohens_d": -0.024,
+    "mean_diff_95ci": [
+      -0.285,
+      0.242
+    ],
+    "eta_squared": 0.0006,
+    "cronbach_alpha": 0.808,
+    "emergency_mean": 2.574,
+    "emergency_sd": 1.118,
+    "casual_mean": 2.596,
+    "casual_sd": 1.116,
+    "p_value": 0.6365749108067902,
+    "mde_d_at_this_n": 0.417,
+    "by_residence": {
+      "Major City": {
+        "n": 4,
+        "emergency_mean": 2.25,
+        "casual_mean": 1.25
+      },
+      "Rural Area / Village": {
+        "n": 23,
+        "emergency_mean": 2.826,
+        "casual_mean": 2.957
+      },
+      "Town or Small City": {
+        "n": 20,
+        "emergency_mean": 2.35,
+        "casual_mean": 2.45
+      }
+    }
+  },
+  "ride_share_emergency_vs_casual_main_sample_for_reference": {
+    "n": 185,
+    "emergency_mean": 2.0,
+    "casual_mean": 2.173,
+    "wilcoxon_p": 0.005774284298506768,
+    "cohens_d": -0.194
+  },
+  "ride_share_pooled_sensitivity_check": {
+    "n": 232,
+    "normality_ok": false,
+    "shapiro_p_a": 4.745879975559505e-16,
+    "shapiro_p_b": 1.0299032805664574e-13,
+    "primary_test": "wilcoxon",
+    "paired_t": -2.426,
+    "paired_t_p": 0.01605373824651599,
+    "wilcoxon_w": 966.0,
+    "wilcoxon_p": 0.007117366704876308,
+    "cohens_d": -0.159,
+    "mean_diff_95ci": [
+      -0.258,
+      -0.027
+    ],
+    "eta_squared": 0.0248,
+    "cronbach_alpha": 0.84,
+    "note": "SENSITIVITY CHECK ONLY, not a primary statistic: pools the main N=199 sample with the 47-respondent follow-up sample despite their different instruments, consent models, and unverifiable independence. Reported only to show the direction/magnitude does not flip when naively pooled; the paper's primary figures are the two samples reported separately above."
+  }
+}

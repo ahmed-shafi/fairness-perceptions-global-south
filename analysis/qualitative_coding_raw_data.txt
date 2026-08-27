@@ -1,0 +1,92 @@
+======================================================================
+ITEM A -- Column [46]: 'Do you think certain cultures or languages
+are excluded more often in LLM responses? If yes, why?' (n=66)
+======================================================================
+[A01] Yes, certain cultures or languages are excluded more often due to limited training data, global power dynamics, and Western-centric content dominance.
+[A02] World's politics
+[A03] yes. European and American are focusing over homosexuality all over the internet. this thing don't go with our culture .
+[A04] Western
+[A05] no
+[A06] না
+[A07] হ্যাঁ,  কিছু সংস্কৃতি বা ভাষা LLM (Language Model) এর উত্তরগুলোতে তুলনামূলকভাবে কম প্রতিফলিত হয়। কারণ হলো প্রশিক্ষণ ডেটাতে সেই ভাষা বা সংস্কৃতির উপস্থাপন কম থাকে, ফলে মডেল সেই বিষয়গুলো কম শেখে।
+[A08] No
+[A09] না
+[A10] No comment
+[A11] No
+[A12] No
+[A13] No
+[A14] Couldn't tell
+[A15] Yes due to western culture Muslim culture gets less importance.
+[A16] No
+[A17] No
+[A18] No comments
+[A19] Western Culture it follows
+[A20] Yes it follows America or Europe standards
+[A21] no
+[A22] Yes the less popular culture is often avoided or less prioritized
+[A23] yes
+[A24] Yes, some cultures and languages, like Bengali or indigenous ones, are often underrepresented in LLM responses due to biased training data favoring dominant languages, limited digital content for smaller languages, and less focus on cultural nuances.
+[A25] Prefer not to answer
+[A26] Yes
+[A27] no comment
+[A28] Jani nh
+[A29] Yes
+[A30] Yes
+[A31] yes
+[A32] ChatGPT said:
+
+হ্যাঁ, কিছু সংস্কৃতি বা ভাষা LLM (Language Model) এর উত্তরগুলোতে তুলনামূলকভাবে কম প্রতিফলিত হয়। কারণ হলো প্রশিক্ষণ ডেটাতে সেই ভাষা বা সংস্কৃতির উপস্থাপন কম থাকে, ফলে মডেল সেই বিষয়গুলো কম শেখে।
+[A33] No
+[A34] fs
+[A35] Don't know
+[A36] Yes they are excluded
+[A37] Yes
+[A38] No
+[A39] Na
+[A40] yes , to increase powerfull nation's power .
+[A41] No
+[A42] Not really
+[A43] no
+[A44] Yes , they are not trained.
+[A45] No
+[A46] Yes, probably yet in improving phrase
+[A47] western values
+[A48] .
+[A49] I don't know
+[A50] na
+[A51] no
+[A52] .
+[A53] Initially LLMs have the tendency to response from all aspects being non biased. Also, if prompted correctly at the beginning, these will even give responses being non biased towards the other missing cultures and languages. So, the answer is NO. I don't think.
+[A54] NO
+[A55] yes. because ---- data imbalance , cultural bias, representation graph .....
+[A56] asians
+[A57] maybe because the whole system was developed by west and so they support western culture more
+[A58] I believe it is to avoid controversy. Some topics are restricted directly by the developers.
+[A59] Yes
+[A60] don't know.
+[A61] No
+[A62] No
+[A63] Yess
+[A64] Yes
+[A65] o joktik
+[A66] o joktik
+
+======================================================================
+ITEM B -- Column [42]: 'What aspects of the LLM's response made it
+feel biased or unbiased to you? Please explain.' -- FREE-TEXT SUBSET ONLY
+(fixed-checkbox responses to this item excluded)
+======================================================================
+[B01] A response may feel biased if it presents only one perspective, uses emotionally charged language, or favors a particular group or idea without balance.
+[B02] Cultural domination i guess.
+[B03] Dnt know
+[B04] training based on only particular data or scenario.
+[B05] test
+
+======================================================================
+ITEM C -- Column [Unnamed:59], follow-up to 'Are some groups more
+negatively affected [by beauty filters]?' -- If yes, why? (n=4)
+======================================================================
+[C01] They struggle to accept their natural face
+[C02] They show themself one in social media but in real life they are different. They are not that perfect as like filtered picture. This is kind of inauthentic.
+[C03] some groups more negatively affected than others because they think filters usually make a fake appearance of a person's outlook.
+[C04] Black people faces problem
