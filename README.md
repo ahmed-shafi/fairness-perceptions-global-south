@@ -1,6 +1,6 @@
 # Algorithmic Fairness Perceptions in the Global South
 
-Data and code for **"Algorithmic Fairness Perceptions in the Global South: Evidence from Bangladesh on Ride-Sharing, Beauty Filters, and Large Language Models"** — an empirical, mixed-methods survey study (N=199) examining how people in Bangladesh perceive algorithmic fairness across three everyday domains: ride-sharing pricing, AI beauty filters, and large language models.
+Data and code for **"Algorithmic Fairness Perceptions in the Global South: Evidence from Bangladesh on Ride-Sharing, Beauty Filters, and Large Language Models"** — an empirical survey study (N=199) examining how people in Bangladesh perceive algorithmic fairness across three everyday domains: ride-sharing pricing, AI beauty filters, and large language models.
 
 **Authors:** Ahmed Abdal Shafi Rasel, Ahmed Mustafa Amlan, Tasmim Shajahan Mim (Department of Computer Science and Engineering, East West University, Dhaka, Bangladesh)
 
@@ -21,9 +21,7 @@ Data and code for **"Algorithmic Fairness Perceptions in the Global South: Evide
 │   ├── run_followup_analysis.py     # Analysis pipeline (supplementary driver sample)
 │   ├── followup_codebook.py         # Column-name mapping for ride-share-survey.xlsx
 │   ├── followup_results.json        # Results from the driver sample
-│   ├── RideShareFollowUp.ipynb      # Executed notebook, follow-up analysis
-│   ├── qualitative_coding_log.md    # Thematic coding log for open-ended responses
-│   └── qualitative_coding_raw_data.txt
+│   └── RideShareFollowUp.ipynb      # Executed notebook, follow-up analysis
 ├── images/                          # All figures reported in the paper (PNG + vector PDF)
 └── survey_instrument/
     ├── english_survey_instrument.md # Full English wording, both instruments
@@ -41,7 +39,7 @@ python run_analysis.py            # regenerates results.json and every figure in
 python run_followup_analysis.py   # regenerates followup_results.json
 ```
 
-Running `run_analysis.py` against `survey.csv` regenerates every quantitative statistic, table, and figure reported in the paper's Results section from scratch. The qualitative themes are not pipeline output — they are reproducible by reading `qualitative_coding_log.md` against the response data directly.
+Running `run_analysis.py` against `survey.csv` regenerates every quantitative statistic, table, and figure reported in the paper's Results section from scratch.
 
 ## Data and privacy
 
