@@ -728,6 +728,66 @@
       "p": 5.413607851811837e-06
     }
   },
+  "ride_share_context_descriptives": {
+    "fair_overall": {
+      "n": 199,
+      "response_counts": {
+        "Unfair": 145,
+        "Fair": 52,
+        "Not sure": 2
+      },
+      "pct_fair": 26.1,
+      "note": "Unfair appears in two variants (differential-treatment / injustice); both count as Unfair, only the Fair category counts as fair (matching the driver-comparison definition in followup_results.json)."
+    },
+    "harm_item": {
+      "n": 199,
+      "mean": 3.477,
+      "sd": 1.31,
+      "note": "Higher = more harm, per the interpretation used throughout the multi-domain manuscript."
+    },
+    "trust_item": {
+      "n": 199,
+      "mean": 3.613,
+      "sd": 1.266,
+      "note": "Higher = larger hit to platform trust, per the interpretation used throughout the multi-domain manuscript."
+    },
+    "lowincome_area_pricing": {
+      "n": 199,
+      "mean": 2.352,
+      "sd": 1.301,
+      "pct_unfair_1_or_2": 53.8,
+      "note": "Same anchored 1=Very Unfair..5=Very Fair family as the emergency/casual items (see codebook.py)."
+    },
+    "eid_surge_acceptable": {
+      "n": 199,
+      "pct_yes": 34.2
+    },
+    "discount_makes_fairer": {
+      "n": 199,
+      "pct_yes": 82.4
+    },
+    "ecommerce_more_acceptable_than_ridehailing": {
+      "n": 199,
+      "pct_yes": 52.3,
+      "response_counts": {
+        "Yes": 104,
+        "No": 88,
+        "Not sure": 4,
+        "About the same / সমানভাবে": 3
+      }
+    },
+    "why_unfair_multiselect": {
+      "n_responses": 197,
+      "selection_counts": {
+        "It discriminates against low-income areas": 72,
+        "It exploits urgency or emergencies": 97,
+        "It increases inequality": 86,
+        "It reduces trust": 74,
+        "I think this is fair": 23
+      },
+      "note": "Multi-select: counts are selections across respondents, not respondents. The instrument offered an explicit 'I think this is fair' escape option."
+    }
+  },
   "sensitivity_analysis": {
     "note": "Minimum detectable Cohen's d at alpha=.05, 80% power, for a paired design, given actual N per comparison. Effects smaller than this could exist in the population without this study reliably detecting them.",
     "main_ride_share_comparison_n": 185,

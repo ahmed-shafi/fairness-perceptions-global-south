@@ -794,6 +794,91 @@ def main():
         "explain_vs_bias_disclosure": {"n": int(len(pair2)), "phi": round(float(r2), 3), "p": float(p2)},
     }
 
+    # ---------------- Ride-sharing: additional context & policy items (descriptives) ----------------
+    # Descriptive statistics for ride-share scenario items not analyzed in the
+    # original multi-domain manuscript, added for the ride-hailing-focused
+    # paper (TR Part F submission, 2026-09-25). The rain/storm item
+    # (rs_rain_feeling) is deliberately EXCLUDED: the live instrument gives it
+    # no labeled response anchors ("উত্তর: 1--5" in the instrument appendix),
+    # so its response direction is unverifiable -- the same unlabeled-scale
+    # defect documented for the beauty-filter impact items. Everything below
+    # has an unambiguous scale: the low-income-area item shares the anchored
+    # 1=Very Unfair..5=Very Fair family of the emergency/casual items; the
+    # Eid, discount, and e-commerce items are categorical.
+    from collections import Counter
+    ctx = {}
+
+    fo = col(df, "rs_fair_overall").dropna()
+    fo_lab = fo.astype(str).str.split(" / ", n=1, regex=False).str[0].str.strip()
+    ctx["fair_overall"] = {
+        "n": int(len(fo_lab)),
+        "response_counts": fo_lab.value_counts().to_dict(),
+        "pct_fair": round(float(fo_lab.eq("Fair").mean()) * 100, 1),
+        "note": "Unfair appears in two variants (differential-treatment / injustice); "
+                "both count as Unfair, only the Fair category counts as fair (matching "
+                "the driver-comparison definition in followup_results.json).",
+    }
+
+    harm_d = pd.to_numeric(col(df, "rs_harm"), errors="coerce").dropna()
+    trust_d = pd.to_numeric(col(df, "rs_trust_impact"), errors="coerce").dropna()
+    ctx["harm_item"] = {
+        "n": int(len(harm_d)), "mean": round(float(harm_d.mean()), 3),
+        "sd": round(float(harm_d.std()), 3),
+        "note": "Higher = more harm, per the interpretation used throughout the "
+                "multi-domain manuscript.",
+    }
+    ctx["trust_item"] = {
+        "n": int(len(trust_d)), "mean": round(float(trust_d.mean()), 3),
+        "sd": round(float(trust_d.std()), 3),
+        "note": "Higher = larger hit to platform trust, per the interpretation used "
+                "throughout the multi-domain manuscript.",
+    }
+
+    lowinc = pd.to_numeric(col(df, "rs_lowincome_fairness"), errors="coerce").dropna()
+    ctx["lowincome_area_pricing"] = {
+        "n": int(len(lowinc)), "mean": round(float(lowinc.mean()), 3),
+        "sd": round(float(lowinc.std()), 3),
+        "pct_unfair_1_or_2": round(float((lowinc <= 2).mean()) * 100, 1),
+        "note": "Same anchored 1=Very Unfair..5=Very Fair family as the "
+                "emergency/casual items (see codebook.py).",
+    }
+
+    eid = yn(col(df, "rs_eid_acceptable"))
+    ctx["eid_surge_acceptable"] = {
+        "n": int(eid.notna().sum()),
+        "pct_yes": round(float(eid.dropna().mean()) * 100, 1),
+    }
+
+    disc = col(df, "rs_discount_fairer").dropna().astype(str)
+    ctx["discount_makes_fairer"] = {
+        "n": int(len(disc)),
+        "pct_yes": round(float(disc.str.startswith("Yes").mean()) * 100, 1),
+    }
+
+    ecom = col(df, "rs_ecommerce_more_acceptable").dropna().astype(str)
+    ctx["ecommerce_more_acceptable_than_ridehailing"] = {
+        "n": int(len(ecom)),
+        "pct_yes": round(float(ecom.str.startswith("Yes").mean()) * 100, 1),
+        "response_counts": ecom.str.split(" (", n=1, regex=False).str[0].str.strip().value_counts().to_dict(),
+    }
+
+    why = col(df, "rs_why_unfair").dropna()
+    sel = Counter()
+    for v in why:
+        for part in str(v).split(";"):
+            p = part.strip()
+            if p:
+                sel[str(p).split(" (", 1)[0].strip()] += 1
+    ctx["why_unfair_multiselect"] = {
+        "n_responses": int(len(why)),
+        "selection_counts": dict(sel),
+        "note": "Multi-select: counts are selections across respondents, not "
+                "respondents. The instrument offered an explicit 'I think this is "
+                "fair' escape option.",
+    }
+
+    results["ride_share_context_descriptives"] = ctx
+
     # ---------------- Sensitivity / power analysis ----------------
     smallest_subgroup_n = min(
         v["n"] for v in results["ride_share_emergency_vs_casual"]["by_ses"].values()
