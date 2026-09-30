@@ -140,6 +140,28 @@
         "emergency_mean": 1.87,
         "casual_mean": 1.913
       }
+    },
+    "robustness": {
+      "n": 185,
+      "pct_emergency_less_fair": 22.2,
+      "pct_casual_less_fair": 11.9,
+      "pct_identical": 65.9,
+      "sign_test_p": 0.022574972673257185,
+      "rank_biserial_r": 0.318,
+      "income_interaction": {
+        "mean_gap_by_income": {
+          "Lower-income": 0.071,
+          "Middle-income": 0.233,
+          "Upper-income": 0.043
+        },
+        "F": 0.781,
+        "dof": [
+          2,
+          182
+        ],
+        "p": 0.4593058077984751,
+        "note": "OLS of the within-respondent gap (casual - emergency rating) on income indicators, HC3-robust SEs; the joint F-test of the income dummies IS the income x context interaction. Positive gap = emergency judged less fair."
+      }
     }
   },
   "beauty_self_image_vs_social_pressure": {

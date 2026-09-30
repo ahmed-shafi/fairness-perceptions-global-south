@@ -360,6 +360,52 @@ def main():
     rs["by_ses"] = ses_group
     results["ride_share_emergency_vs_casual"] = rs
 
+    # ---------------- Context effect: robustness + income interaction ----------------
+    # Added 2026-09-30 (Round 10 addendum 7). Two reviewer-facing additions:
+    # (1) a distributional breakdown of the primary comparison that does not
+    # depend on the Wilcoxon test's machinery -- signed-difference shares, an
+    # exact sign test on direction, and the matched-pairs rank-biserial
+    # correlation (Kerby); (2) a formal test of the income x context
+    # interaction. Each respondent contributes exactly ONE gap (casual -
+    # emergency), so the interaction is a between-respondent regression on the
+    # gap with HC3-robust SEs -- no clustering required, contrary to the
+    # earlier claim in the manuscript that a mixed design "cannot" test it.
+    diff_rs = (both["cas"] - both["emer"]).dropna()
+    n_pos = int((diff_rs > 0).sum())    # casual rated fairer  -> emergency judged less fair
+    n_neg = int((diff_rs < 0).sum())
+    n_zero = int((diff_rs == 0).sum())
+    sign_res = stats.binomtest(n_pos, n_pos + n_neg, p=0.5)
+    ranks = stats.rankdata(diff_rs.abs())
+    r_pos = float(ranks[diff_rs > 0].sum())
+    r_neg = float(ranks[diff_rs < 0].sum())
+    r_rb = (r_pos - r_neg) / (r_pos + r_neg)
+
+    gap_df = pd.DataFrame({"gap": diff_rs, "inc": both["ses"]}).dropna()
+    gap_df["inc"] = pd.Categorical(gap_df["inc"],
+                                   categories=["Lower-income", "Middle-income", "Upper-income"])
+    from statsmodels.formula.api import ols as smf_ols
+    fit_gap = smf_ols("gap ~ C(inc)", data=gap_df).fit(cov_type="HC3")
+    ftest = fit_gap.f_test("C(inc)[T.Middle-income] = 0, C(inc)[T.Upper-income] = 0")
+    mean_gaps = gap_df.groupby("inc", observed=True)["gap"].mean().round(3).to_dict()
+
+    results["ride_share_emergency_vs_casual"]["robustness"] = {
+        "n": int(len(diff_rs)),
+        "pct_emergency_less_fair": round(100.0 * n_pos / len(diff_rs), 1),
+        "pct_casual_less_fair": round(100.0 * n_neg / len(diff_rs), 1),
+        "pct_identical": round(100.0 * n_zero / len(diff_rs), 1),
+        "sign_test_p": float(sign_res.pvalue),
+        "rank_biserial_r": round(r_rb, 3),
+        "income_interaction": {
+            "mean_gap_by_income": mean_gaps,
+            "F": round(float(ftest.fvalue), 3),
+            "dof": [2, int(fit_gap.df_resid)],
+            "p": float(ftest.pvalue),
+            "note": "OLS of the within-respondent gap (casual - emergency rating) on income "
+                    "indicators, HC3-robust SEs; the joint F-test of the income dummies IS the "
+                    "income x context interaction. Positive gap = emergency judged less fair.",
+        },
+    }
+
     # Figure 1: Emergency vs Casual overall (bar with error bars)
     fig, ax = plt.subplots(figsize=(6, 5))
     means = [rs["emergency_mean"], rs["casual_mean"]]
