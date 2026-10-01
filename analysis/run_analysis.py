@@ -66,6 +66,10 @@ plt.rcParams.update({
     "font.size": 11,
     "axes.titlesize": 13,
     "axes.titleweight": "bold",
+    # Embed fonts as TrueType (Type 42) rather than matplotlib's default
+    # Type 3, which publisher PDF preflight checks commonly reject.
+    "pdf.fonttype": 42,
+    "ps.fonttype": 42,
 })
 
 results = {}
@@ -412,13 +416,15 @@ def main():
     sds = [rs["emergency_sd"], rs["casual_sd"]]
     bars = ax.bar(["Emergency", "Casual"], means, yerr=sds, capsize=8,
                    color=["#d6604d", "#4393c3"], alpha=0.85, width=0.55)
-    for b, m in zip(bars, means):
-        ax.text(b.get_x() + b.get_width() / 2, m + 0.08, f"{m:.2f}", ha="center", fontweight="bold")
+    for b, m, s in zip(bars, means, sds):
+        # Value label above the SD error-bar cap, so the two never overlap.
+        ax.text(b.get_x() + b.get_width() / 2, m + s + 0.05, f"M = {m:.2f}", ha="center", va="bottom",
+                fontweight="bold")
     ax.set_ylabel("Perceived Fairness (1=Very Unfair, 5=Very Fair)")
-    ax.set_title(f"Perceived Fairness of Price Increases:\nEmergency vs. Casual Contexts (N={rs['n']})")
+    # No in-figure title: Elsevier artwork rules put the title in the caption only.
     ax.set_ylim(0, 4)
     p_str = "p < .001" if rs["p_value"] < .001 else f"p = {rs['p_value']:.3f}"
-    ax.text(0.5, 3.6, f"Wilcoxon {p_str}, d={rs['cohens_d']:.2f}", ha="center", transform=ax.transData, fontsize=9, style="italic")
+    ax.text(0.5, 3.82, f"Wilcoxon {p_str}, d={rs['cohens_d']:.2f}", ha="center", transform=ax.transData, fontsize=9, style="italic")
     ax.grid(axis="y", alpha=0.25)
     save_fig("figure1")
 
@@ -434,7 +440,6 @@ def main():
     ax.set_xticks(x)
     ax.set_xticklabels([g.replace("-income", "") for g in order])
     ax.set_ylabel("Perceived Fairness (1-5)")
-    ax.set_title("Emergency vs. Casual Scenario Fairness\nby Socioeconomic Status")
     ax.legend()
     ax.set_ylim(0, 4)
     ax.grid(axis="y", alpha=0.25)
@@ -694,19 +699,23 @@ def main():
     metric_labels = {"customize": "Customize", "prior_consent": "Prior Consent",
                       "explain": "Explanation", "indicate_bias": "Bias Indicators"}
     metrics = ["customize", "prior_consent", "explain", "indicate_bias"]
+    # Okabe-Ito colours (colour-vision-deficiency safe), per Elsevier's
+    # accessible-colour guidance; replaces the default red/green-adjacent cycle.
+    metric_colors = {"customize": "#0072B2", "prior_consent": "#E69F00",
+                     "explain": "#009E73", "indicate_bias": "#CC79A7"}
     w = 0.19
+    # The RQ4 figures carry no in-figure title (Elsevier: title in the caption only).
 
     fig, ax = plt.subplots(figsize=(7.5, 5))
     order = ["Lower-income", "Middle-income", "Upper-income"]
     x = np.arange(len(order))
     for i, m in enumerate(metrics):
         vals = [by_group["by_ses"][m]["pct_yes_by_group"].get(g, np.nan) for g in order]
-        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m])
+        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m], color=metric_colors[m])
     ax.set_xticks(x)
     ax.set_xticklabels([g.replace("-income", "") for g in order])
     ax.set_ylabel("% Responding Yes")
     ax.set_ylim(0, 100)
-    ax.set_title("Demand for Algorithmic Control Across Income Groups")
     ax.legend(fontsize=9, loc="upper center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.12))
     ax.grid(axis="y", alpha=0.25)
     fig.tight_layout()
@@ -717,12 +726,11 @@ def main():
     x = np.arange(len(order_g))
     for i, m in enumerate(metrics):
         vals = [by_group["by_gender"][m]["pct_yes_by_group"].get(g, np.nan) for g in order_g]
-        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m])
+        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m], color=metric_colors[m])
     ax.set_xticks(x)
     ax.set_xticklabels(order_g)
     ax.set_ylabel("% Responding Yes")
     ax.set_ylim(0, 100)
-    ax.set_title("Demand for Algorithmic Control Across Gender Groups")
     ax.legend(fontsize=9, loc="upper center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.12))
     ax.grid(axis="y", alpha=0.25)
     fig.tight_layout()
@@ -734,12 +742,11 @@ def main():
     x = np.arange(len(order_a))
     for i, m in enumerate(metrics):
         vals = [by_group["by_awareness"][m]["pct_yes_by_group"].get(g, np.nan) for g in order_a]
-        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m])
+        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m], color=metric_colors[m])
     ax.set_xticks(x)
     ax.set_xticklabels(order_a_labels)
     ax.set_ylabel("% Responding Yes")
     ax.set_ylim(0, 100)
-    ax.set_title("Demand for Algorithmic Control by Prior Awareness of Algorithmic Bias")
     ax.legend(fontsize=9, loc="upper center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.12))
     ax.grid(axis="y", alpha=0.25)
     fig.tight_layout()
@@ -754,12 +761,11 @@ def main():
     x = np.arange(len(order_r))
     for i, m in enumerate(metrics):
         vals = [by_group["by_residence"][m]["pct_yes_by_group"].get(g, np.nan) for g in order_r]
-        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m])
+        ax.bar(x + (i - 1.5) * w, vals, width=w, label=metric_labels[m], color=metric_colors[m])
     ax.set_xticks(x)
     ax.set_xticklabels(order_r_labels)
     ax.set_ylabel("% Responding Yes")
     ax.set_ylim(0, 100)
-    ax.set_title("Demand for Algorithmic Control by Residence (Exploratory)")
     ax.legend(fontsize=9, loc="upper center", ncol=4, frameon=False, bbox_to_anchor=(0.5, -0.12))
     ax.grid(axis="y", alpha=0.25)
     fig.tight_layout()
